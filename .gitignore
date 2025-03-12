@@ -1,6 +1,6 @@
 # Ignore Python virtual environments
 /myenv
-/myvenv
+/my_env
 /venv
 /env
 .env
