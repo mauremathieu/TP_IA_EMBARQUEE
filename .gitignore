@@ -15,8 +15,10 @@ __pycache__/
 # Ignore Jupyter Notebook output files
 *.nbconvert.ipynb
 
-# ignore .np
+# ignore .npy
 *.npy
 
 # ignore model
 *.tflite
+
+/debug
