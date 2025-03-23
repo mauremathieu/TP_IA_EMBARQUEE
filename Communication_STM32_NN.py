@@ -1,7 +1,7 @@
 import serial
 import numpy as np
 
-PORT = "COM4"
+PORT = "COM5"
 
 
 def synchronise_UART(serial_port):
@@ -81,13 +81,17 @@ def evaluate_model_on_STM32(iterations, serial_port):
 
 
 if __name__ == '__main__':
-    X_test = np.load("./data/X_test.npy")
-    Y_test = np.load("./data/Y_test.npy")
+    X_test = np.load("./data/X_val.npy")
+    Y_test = np.load("./data/Y_val.npy")
 
-    with serial.Serial(PORT, 115200, timeout=1) as ser:
-        print("Synchronising...")
-        synchronise_UART(ser)
-        print("Synchronised")
+    try:
+        with serial.Serial(PORT, 115200, timeout=1) as ser:
+            print("Synchronising...")
+            synchronise_UART(ser)
+            print("Synchronised")
 
-        print("Evaluating model on STM32...")
-        error = evaluate_model_on_STM32(100, ser)
+            print("Evaluating model on STM32...")
+            accuracy = evaluate_model_on_STM32(100, ser)
+            print(f"Final accuracy: {accuracy:.2%}")
+    except serial.SerialException as e:
+        print(f"Error opening serial port {PORT}: {e}")
