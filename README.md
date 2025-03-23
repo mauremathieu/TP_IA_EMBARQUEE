@@ -33,6 +33,7 @@ The project is structured around a Jupyter notebook that guides through the foll
 - Pandas
 - Matplotlib
 - Scikit-learn
+- Numpy
 - Imbalanced-learn (for data balancing)
 
 ## Installation and Usage
