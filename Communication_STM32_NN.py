@@ -1,8 +1,15 @@
 import serial
+import serial.tools.list_ports
 import numpy as np
 
-PORT = "COM5"
+# Détecter automatiquement le premier port série disponible sous Windows
+def find_available_port():
+    ports = list(serial.tools.list_ports.comports())
+    if not ports:
+        raise RuntimeError("Aucun port série disponible. Vérifiez la connexion de votre STM32.")
+    return ports[0].device  # Retourne le premier port trouvé (ex: 'COM3')
 
+PORT = find_available_port() 
 
 def synchronise_UART(serial_port):
     """
@@ -81,17 +88,13 @@ def evaluate_model_on_STM32(iterations, serial_port):
 
 
 if __name__ == '__main__':
-    X_test = np.load("./data/X_val.npy")
-    Y_test = np.load("./data/Y_val.npy")
+    X_test = np.load("./data/X_test.npy")
+    Y_test = np.load("./data/Y_test.npy")
 
-    try:
-        with serial.Serial(PORT, 115200, timeout=1) as ser:
-            print("Synchronising...")
-            synchronise_UART(ser)
-            print("Synchronised")
+    with serial.Serial(PORT, 115200, timeout=1) as ser:
+        print("Synchronising...")
+        synchronise_UART(ser)
+        print("Synchronised")
 
-            print("Evaluating model on STM32...")
-            accuracy = evaluate_model_on_STM32(100, ser)
-            print(f"Final accuracy: {accuracy:.2%}")
-    except serial.SerialException as e:
-        print(f"Error opening serial port {PORT}: {e}")
+        print("Evaluating model on STM32...")
+        error = evaluate_model_on_STM32(100, ser)
