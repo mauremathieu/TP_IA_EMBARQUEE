@@ -1,0 +1,422 @@
+{
+    "_allocate_inputs": 4,
+    "_allocate_outputs": 4,
+    "cli_parameters": "generate --target stm32l4 --name neural_network -m C:/Users/maure/OneDrive/Bureau/ISMIN/IA_manu_embarq/TP_IA_EMBARQUEE/my_model_mlp.tflite --compression medium --verbosity 1 --workspace C:/Users/maure/AppData/Local/Temp/mxAI_workspace17995756060810013502285859117549221 --output C:/Users/maure/.stm32cubemx/neural_network_output",
+    "cli_version": {
+        "extra": "20049",
+        "major": 2,
+        "micro": 0,
+        "minor": 0
+    },
+    "cli_version_str": "2.0.0-20049",
+    "code_size": 0,
+    "compression": [],
+    "date_time": "2025-03-20T10:37:38+0100",
+    "error": 0,
+    "error_str": [],
+    "exec_cmd": "generate",
+    "exec_duration": 0.0,
+    "hash": "0x58ceab75f6f4bfa5e92b47ca687d0daf",
+    "inputs": [
+        "serving_default_keras_tensor_500"
+    ],
+    "layers": [
+        {
+            "c_id": [
+                0,
+                1
+            ],
+            "extras": {
+                "n_macc": 0,
+                "n_params": 0,
+                "psize": 0,
+                "rom_output": {
+                    "c_size": 39912,
+                    "fmt": {
+                        "format": "float"
+                    },
+                    "shape": [
+                        9978
+                    ]
+                },
+                "rom_size": 1278272
+            },
+            "id": 0,
+            "inputs": [],
+            "name": "serving_default_keras_tensor_500",
+            "original": "",
+            "type": "Input"
+        },
+        {
+            "c_id": [],
+            "extras": {
+                "n_macc": 0,
+                "n_params": 2554368,
+                "psize": 10217472,
+                "rom_size": 0
+            },
+            "id": 0,
+            "inputs": [],
+            "name": "my_model_mlp_1_dense_23_1_MatMul",
+            "original": "",
+            "type": "Placeholder"
+        },
+        {
+            "c_id": [],
+            "extras": {
+                "n_macc": 0,
+                "n_params": 256,
+                "psize": 1024,
+                "rom_size": 0
+            },
+            "id": 0,
+            "inputs": [],
+            "name": "my_model_mlp_1_dense_23_1_BiasAdd_ReadVariableOp",
+            "original": "",
+            "type": "Placeholder"
+        },
+        {
+            "c_id": [],
+            "extras": {
+                "n_macc": 2554624,
+                "n_params": 0,
+                "psize": 0,
+                "rom_output": {
+                    "c_size": 1024,
+                    "fmt": {
+                        "format": "float"
+                    },
+                    "shape": [
+                        256
+                    ]
+                },
+                "rom_size": 0
+            },
+            "id": 0,
+            "inputs": [
+                "serving_default_keras_tensor_500",
+                "my_model_mlp_1_dense_23_1_MatMul",
+                "my_model_mlp_1_dense_23_1_BiasAdd_ReadVariableOp"
+            ],
+            "name": "gemm_0",
+            "original": "FULLY_CONNECTED",
+            "type": "Gemm"
+        },
+        {
+            "c_id": [],
+            "extras": {
+                "n_macc": 256,
+                "n_params": 0,
+                "psize": 0,
+                "rom_output": {
+                    "c_size": 1024,
+                    "fmt": {
+                        "format": "float"
+                    },
+                    "shape": [
+                        256
+                    ]
+                },
+                "rom_size": 0
+            },
+            "id": 0,
+            "inputs": [
+                "gemm_0"
+            ],
+            "name": "nl_0_nl",
+            "original": "FULLY_CONNECTED",
+            "type": "Nonlinearity"
+        },
+        {
+            "c_id": [
+                2,
+                3
+            ],
+            "extras": {
+                "n_macc": 0,
+                "n_params": 32768,
+                "psize": 131072,
+                "rom_size": 131584
+            },
+            "id": 1,
+            "inputs": [],
+            "name": "arith_constant2",
+            "original": "",
+            "type": "Placeholder"
+        },
+        {
+            "c_id": [],
+            "extras": {
+                "n_macc": 0,
+                "n_params": 128,
+                "psize": 512,
+                "rom_size": 0
+            },
+            "id": 1,
+            "inputs": [],
+            "name": "arith_constant5",
+            "original": "",
+            "type": "Placeholder"
+        },
+        {
+            "c_id": [],
+            "extras": {
+                "n_macc": 32896,
+                "n_params": 0,
+                "psize": 0,
+                "rom_output": {
+                    "c_size": 512,
+                    "fmt": {
+                        "format": "float"
+                    },
+                    "shape": [
+                        128
+                    ]
+                },
+                "rom_size": 0
+            },
+            "id": 1,
+            "inputs": [
+                "nl_0_nl",
+                "arith_constant2",
+                "arith_constant5"
+            ],
+            "name": "gemm_1",
+            "original": "FULLY_CONNECTED",
+            "type": "Gemm"
+        },
+        {
+            "c_id": [],
+            "extras": {
+                "n_macc": 128,
+                "n_params": 0,
+                "psize": 0,
+                "rom_output": {
+                    "c_size": 512,
+                    "fmt": {
+                        "format": "float"
+                    },
+                    "shape": [
+                        128
+                    ]
+                },
+                "rom_size": 0
+            },
+            "id": 1,
+            "inputs": [
+                "gemm_1"
+            ],
+            "name": "nl_1_nl",
+            "original": "FULLY_CONNECTED",
+            "type": "Nonlinearity"
+        },
+        {
+            "c_id": [
+                4,
+                5
+            ],
+            "extras": {
+                "n_macc": 0,
+                "n_params": 8192,
+                "psize": 32768,
+                "rom_size": 33024
+            },
+            "id": 2,
+            "inputs": [],
+            "name": "arith_constant1",
+            "original": "",
+            "type": "Placeholder"
+        },
+        {
+            "c_id": [],
+            "extras": {
+                "n_macc": 0,
+                "n_params": 64,
+                "psize": 256,
+                "rom_size": 0
+            },
+            "id": 2,
+            "inputs": [],
+            "name": "arith_constant4",
+            "original": "",
+            "type": "Placeholder"
+        },
+        {
+            "c_id": [],
+            "extras": {
+                "n_macc": 8256,
+                "n_params": 0,
+                "psize": 0,
+                "rom_output": {
+                    "c_size": 256,
+                    "fmt": {
+                        "format": "float"
+                    },
+                    "shape": [
+                        64
+                    ]
+                },
+                "rom_size": 0
+            },
+            "id": 2,
+            "inputs": [
+                "nl_1_nl",
+                "arith_constant1",
+                "arith_constant4"
+            ],
+            "name": "gemm_2",
+            "original": "FULLY_CONNECTED",
+            "type": "Gemm"
+        },
+        {
+            "c_id": [],
+            "extras": {
+                "n_macc": 64,
+                "n_params": 0,
+                "psize": 0,
+                "rom_output": {
+                    "c_size": 256,
+                    "fmt": {
+                        "format": "float"
+                    },
+                    "shape": [
+                        64
+                    ]
+                },
+                "rom_size": 0
+            },
+            "id": 2,
+            "inputs": [
+                "gemm_2"
+            ],
+            "name": "nl_2_nl",
+            "original": "FULLY_CONNECTED",
+            "type": "Nonlinearity"
+        },
+        {
+            "c_id": [
+                6
+            ],
+            "extras": {
+                "n_macc": 0,
+                "n_params": 320,
+                "psize": 1280,
+                "rom_size": 1300
+            },
+            "id": 3,
+            "inputs": [],
+            "name": "arith_constant",
+            "original": "",
+            "type": "Placeholder"
+        },
+        {
+            "c_id": [],
+            "extras": {
+                "n_macc": 0,
+                "n_params": 5,
+                "psize": 20,
+                "rom_size": 0
+            },
+            "id": 3,
+            "inputs": [],
+            "name": "arith_constant3",
+            "original": "",
+            "type": "Placeholder"
+        },
+        {
+            "c_id": [],
+            "extras": {
+                "n_macc": 325,
+                "n_params": 0,
+                "psize": 0,
+                "rom_output": {
+                    "c_size": 20,
+                    "fmt": {
+                        "format": "float"
+                    },
+                    "shape": [
+                        5
+                    ]
+                },
+                "rom_size": 0
+            },
+            "id": 3,
+            "inputs": [
+                "nl_2_nl",
+                "arith_constant",
+                "arith_constant3"
+            ],
+            "name": "gemm_3",
+            "original": "FULLY_CONNECTED",
+            "type": "Gemm"
+        },
+        {
+            "c_id": [
+                7
+            ],
+            "extras": {
+                "n_macc": 75,
+                "n_params": 0,
+                "psize": 0,
+                "rom_output": {
+                    "c_size": 20,
+                    "fmt": {
+                        "format": "float"
+                    },
+                    "shape": [
+                        5
+                    ]
+                },
+                "rom_size": 0
+            },
+            "id": 4,
+            "inputs": [
+                "gemm_3"
+            ],
+            "name": "nl_4",
+            "original": "SOFTMAX",
+            "type": "Nonlinearity"
+        }
+    ],
+    "model_files": [
+        "C:\\Users\\maure\\OneDrive\\Bureau\\ISMIN\\IA_manu_embarq\\TP_IA_EMBARQUEE\\my_model_mlp.tflite"
+    ],
+    "model_n_params": 2596101,
+    "model_name": "my_model_mlp",
+    "model_size": 10384404,
+    "model_type": "tflite",
+    "name": "neural_network",
+    "outputs": [
+        "nl_4"
+    ],
+    "ram_io_size": [
+        0,
+        0
+    ],
+    "ram_size": 40936,
+    "report_version": 1.1,
+    "rom_cfact": 1.0,
+    "rom_heap_inspector": 2048,
+    "rom_inputs": [
+        {
+            "c_size": 39912,
+            "c_type": "float",
+            "name": "serving_default_keras_tensor_500"
+        }
+    ],
+    "rom_n_macc": 2596624,
+    "rom_outputs": [
+        {
+            "c_size": 20,
+            "c_type": "float",
+            "name": "nl_4"
+        }
+    ],
+    "rom_size": 1444180,
+    "strategy": "",
+    "tools_api_version": "2.0.0-20049",
+    "tools_version": "2.0.0-20049",
+    "val_error": -1.0,
+    "val_error_desc": "None (None) #-1",
+    "val_metrics": []
+}

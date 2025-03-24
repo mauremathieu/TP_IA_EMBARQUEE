@@ -25,7 +25,17 @@ The project is structured around a Jupyter notebook that guides through the foll
 3. Training a model with balanced dataset
 4. Comparison of model performances
 
-Once the model is done, we upload it and analyze it on STM32CubeIDE thanks to X-Cube AI. Then we validate it on desktop and on device.
+The repository also includes the following files:
+
+- **ai4i2020.csv**: The AI4I 2020 Predictive Maintenance Dataset used for training and testing the models.
+- **neural_network.tflite**: TensorFlow Lite version of the model for embedded deployment.
+- **Communication_STM32_NN.py**: Python script to test communication with the STM32 microcontroller and validate the deployed model.
+- **STM32_Implementation/**: Directory containing STM32CubeIDE project files:
+    - **Core/**: Contains application code and hardware initialization files
+    - **X-CUBE-AI/**: Contains AI model deployment configurations
+    - **Middlewares/**: Third-party libraries and middleware components
+    - **Drivers/**: Hardware abstraction layer drivers for the STM32 microcontroller
+- **.gitignore**
 
 ## Installation and Usage
 
@@ -54,9 +64,9 @@ We evaluate the model using various metrics, including accuracy, confusion matri
 
 The trained model is converted to TensorFlow Lite format and deployed on an STM32 microcontroller using STM32CubeIDE and X-Cube AI. We validate the model on both desktop and device.
 
-## Additional Information
+## Implementation Challenges
 
-For more details on the implementation and analysis, refer to the TP_IA_EMBARQUEE.ipynb notebook.
+The implementation in CubeIDE is not complete. We encountered numerous bugs that we were unable to fix due to lack of documentation and experience with AI deployment in CubeIDE.
 
 ## Technologies Used
 
